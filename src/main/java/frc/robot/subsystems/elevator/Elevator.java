@@ -20,11 +20,11 @@ public class Elevator extends SubsystemBase {
         elevatorIO.lift(Rotations.of(Position));
     }
 
-    public Command liftCommand() {
-        return new InstantCommand(() -> moveToPostion(0));
+    public Command liftCommand(double inches) {
+        return new InstantCommand(() -> moveToPostion(inches));
     }
 
-    public Command lowerCommand() {
-        return new InstantCommand(() -> moveToPostion(0));
+    public Command lowerCommand(double inches) {
+        return new InstantCommand(() -> moveToPostion(-inches));
     }
 }
