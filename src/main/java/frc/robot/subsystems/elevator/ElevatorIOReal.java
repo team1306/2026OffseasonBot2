@@ -11,8 +11,8 @@ import badgerutils.advantagekit.PIDTunable;
 import edu.wpi.first.units.measure.Angle;
 
 public class ElevatorIOReal implements ElevatorIO {
-    TalonFX rightMotor = new TalonFX(ElevatorConstants.rightMotorID);
-    TalonFX leftMotor = new TalonFX(ElevatorConstants.leftMotorID);
+    private TalonFX rightMotor = new TalonFX(ElevatorConstants.rightMotorID);
+    private TalonFX leftMotor = new TalonFX(ElevatorConstants.leftMotorID);
 
     private final PIDTunable pidTunable = new PIDTunable("Elevator", SlotConfigs.from(ElevatorConstants.config.Slot0), leftMotor, rightMotor);
 
@@ -24,15 +24,9 @@ public class ElevatorIOReal implements ElevatorIO {
     }
 
     @Override
-    public void lift(Angle postion) {
+    public void moveToPosition(Angle postion) {
         positionTorque.Position = postion.in(Rotations);
         rightMotor.setControl(positionTorque);
         leftMotor.setControl(positionTorque);
-    }
-
-    @Override
-    public void motorHoldPostion(){
-        rightMotor.setControl(new NeutralOut());
-        leftMotor.setControl(new NeutralOut());
     }
 }

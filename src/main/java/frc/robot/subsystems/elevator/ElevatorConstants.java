@@ -11,15 +11,15 @@ import com.ctre.phoenix6.signals.StaticFeedforwardSignValue;
 import badgerutils.motor.MotorConfigUtils;
 
 public class ElevatorConstants {
-    public static double inchesPerRotation = 1;
+    public final static double inchesPerRotation = 1;
 
-    public static int rightMotorID = 1;
-    public static int leftMotorID = 2;
+    public final static int rightMotorID = 1;
+    public final static int leftMotorID = 2;
 
-    static double KP = 0;
-    static double KS = 0;
-    static double KD = 0;
-    static double KG = 0;
+    static final double KP = 0;
+    static final double KS = 0;
+    static final double KD = 0;
+    static final double KG = 0;
 
     public static TalonFXConfiguration config = new TalonFXConfiguration()
         .withMotorOutput(MotorConfigUtils.createMotorOutputConfig

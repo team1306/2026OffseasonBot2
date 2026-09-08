@@ -13,7 +13,6 @@ public interface ElevatorIO {
   }
 
   
-  public default void lift(Angle postion) {}
+  public default void moveToPosition(Angle postion) {}
 
-  public default void motorHoldPostion(){}
 }
