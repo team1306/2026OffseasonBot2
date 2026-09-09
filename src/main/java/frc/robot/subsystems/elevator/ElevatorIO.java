@@ -12,7 +12,8 @@ public interface ElevatorIO {
     public LoggedTalonFX leftMotor;
   }
 
-  
+  public default void updateInputs(ElevatorIOInputs inputs) {}
+
   public default void moveToPosition(Angle postion) {}
 
 }
