@@ -7,6 +7,9 @@ package frc.robot;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.arm.Arm;
+import frc.robot.subsystems.arm.ArmIO;
+import frc.robot.subsystems.arm.ArmIOReal;
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.ElevatorIO;
 import frc.robot.subsystems.elevator.ElevatorIOReal;
@@ -27,6 +30,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   private final Elevator elevator;
+  private final Arm arm;
 
   private final CommandXboxController controller = new CommandXboxController(0);
 
@@ -35,13 +39,16 @@ public class RobotContainer {
     switch (Constants.currentMode) {
       case REAL:
         elevator = new Elevator(new ElevatorIOReal());
+        arm = new Arm(new ArmIOReal());
         break;
     
       case SIM:
         elevator = new Elevator(new ElevatorIOReal());
+        arm = new Arm(new ArmIOReal());
         break;
       default:
       elevator = new Elevator(new ElevatorIO() {});
+      arm = new Arm(new ArmIO() {});
       break;
     }
 
@@ -54,6 +61,9 @@ public class RobotContainer {
     controller.b().onTrue(elevator.moveToPositionCommand(elevatorPostion.up.getHeight().in(Inches)));
     controller.y().onTrue(elevator.moveToPositionCommand(elevatorPostion.level2.getHeight().in(Inches)));
     controller.x().onTrue(elevator.moveToPositionCommand(elevatorPostion.level3.getHeight().in(Inches)));
+
+    controller.leftBumper().onTrue(arm.rotateArmCommand(0.5));
+    controller.rightBumper().onTrue(arm.rotateArmCommand(-0.5));
   }
 
   public Command getAutonomousCommand(){

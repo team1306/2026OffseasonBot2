@@ -2,11 +2,9 @@ package frc.robot.subsystems.arm;
 
 import org.littletonrobotics.junction.AutoLog;
 
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 import badgerutils.advantagekit.talonfx.LoggedTalonFX;
 import edu.wpi.first.units.measure.Angle;
-import frc.robot.subsystems.elevator.ElevatorIO.ElevatorIOInputs;
 
 public interface ArmIO {
     @AutoLog
@@ -17,4 +15,8 @@ public interface ArmIO {
      public default void updateInputs(ArmIOInput inputs) {}
 
     public default void rotateToPostion(Angle postion) {}
+
+    public default void rotate(double speed){}
+
+    public default void holdPostion(){}
 }
