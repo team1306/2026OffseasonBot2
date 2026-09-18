@@ -15,7 +15,7 @@ import frc.robot.subsystems.elevator.ElevatorConstants;
 
 public class ArmIOReal implements ArmIO {
     
-    private TalonFX motor = new TalonFX(1);
+    private TalonFX motor = new TalonFX(ArmConstants.motorID);
 
     private final PositionTorqueCurrentFOC positionTorque = new PositionTorqueCurrentFOC(0);
 
@@ -28,6 +28,11 @@ public class ArmIOReal implements ArmIO {
         motor.getConfigurator().apply(ArmConstants.config);
     }
 
+
+    @Override
+    public void updateInputs(ArmIOInput inputs){
+        inputs.motor = motorSignals.createLoggedTalonFX();
+    }
 
     @Override
     public void rotateToPostion(Angle postion){
