@@ -12,7 +12,7 @@ public interface ArmIO {
         LoggedTalonFX motor;
     }
 
-     public default void updateInputs(ArmIOInput inputs) {}
+    public default void updateInputs(ArmIOInput inputs) {}
 
     public default void rotateToPostion(Angle postion) {}
 

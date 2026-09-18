@@ -45,6 +45,7 @@ public class ArmIOReal implements ArmIO {
         motor.setControl(new DutyCycleOut(speed));
     }
 
+    @Override
     public void holdPostion(){
         motor.setControl(new NeutralOut());
     }

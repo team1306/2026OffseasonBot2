@@ -11,29 +11,29 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 
 public class Arm implements Subsystem {
     public final ArmIOInputAutoLogged inputs = new ArmIOInputAutoLogged();
-    private ArmIO ArmIO;
+    private ArmIO armIO;
 
     public Arm(ArmIO ArmIO) {
-        this.ArmIO = ArmIO;
+        this.armIO = ArmIO;
     }
 
     @Override
     public void periodic(){
-        ArmIO.updateInputs(inputs); 
+        armIO.updateInputs(inputs); 
         Logger.processInputs("Arm", inputs);
     }
 
     public void holdArmPostion(){
-        ArmIO.holdPostion();
+        armIO.holdPostion();
     }
 
     public void rotateArm(double speed){
-        ArmIO.rotate(speed);
+        armIO.rotate(speed);
     }
 
 
     public Command roatateToPostionCommad(Angle postion){
-        return new InstantCommand(() -> ArmIO.rotateToPostion(postion));
+        return new InstantCommand(() -> armIO.rotateToPostion(postion));
     }
 
     public Command rotateArmCommand(double speed){
