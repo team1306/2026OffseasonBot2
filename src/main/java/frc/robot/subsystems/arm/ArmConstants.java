@@ -9,6 +9,7 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.StaticFeedforwardSignValue;
 
 import badgerutils.motor.MotorConfigUtils;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 public class ArmConstants {
 

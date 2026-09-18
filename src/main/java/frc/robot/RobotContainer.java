@@ -30,7 +30,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   private final Elevator elevator;
-  private final Arm arm;
+  public final Arm arm;
 
   private final CommandXboxController controller = new CommandXboxController(0);
 
