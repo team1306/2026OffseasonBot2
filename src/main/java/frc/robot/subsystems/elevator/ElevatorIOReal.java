@@ -3,10 +3,8 @@ package frc.robot.subsystems.elevator;
 import static edu.wpi.first.units.Units.Rotations;
 
 import com.ctre.phoenix6.configs.SlotConfigs;
-import com.ctre.phoenix6.controls.NeutralOut;
 import com.ctre.phoenix6.controls.PositionTorqueCurrentFOC;
 import com.ctre.phoenix6.hardware.TalonFX;
-import com.ctre.phoenix6.hardware.TalonFXS;
 
 import badgerutils.advantagekit.PIDTunable;
 import badgerutils.advantagekit.talonfx.TalonFXSignals;

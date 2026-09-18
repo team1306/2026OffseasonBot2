@@ -6,14 +6,13 @@ package frc.robot;
 
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.ArmIO;
 import frc.robot.subsystems.arm.ArmIOReal;
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.ElevatorIO;
 import frc.robot.subsystems.elevator.ElevatorIOReal;
-import frc.robot.subsystems.elevator.elevatorPostion;
+import frc.robot.subsystems.elevator.ElevatorPostion;
 
 import static edu.wpi.first.units.Units.Inches;
 
@@ -57,10 +56,10 @@ public class RobotContainer {
 
 
   private void configureBindings(){
-    controller.a().onTrue(elevator.moveToPositionCommand(elevatorPostion.down.getHeight().in(Inches)));
-    controller.b().onTrue(elevator.moveToPositionCommand(elevatorPostion.up.getHeight().in(Inches)));
-    controller.y().onTrue(elevator.moveToPositionCommand(elevatorPostion.level2.getHeight().in(Inches)));
-    controller.x().onTrue(elevator.moveToPositionCommand(elevatorPostion.level3.getHeight().in(Inches)));
+    controller.a().onTrue(elevator.moveToPositionCommand(ElevatorPostion.down.getHeight().in(Inches)));
+    controller.b().onTrue(elevator.moveToPositionCommand(ElevatorPostion.up.getHeight().in(Inches)));
+    controller.y().onTrue(elevator.moveToPositionCommand(ElevatorPostion.level2.getHeight().in(Inches)));
+    controller.x().onTrue(elevator.moveToPositionCommand(ElevatorPostion.level3.getHeight().in(Inches)));
 
     controller.leftBumper().onTrue(arm.rotateArmCommand(0.5));
     controller.rightBumper().onTrue(arm.rotateArmCommand(-0.5));
