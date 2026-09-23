@@ -32,4 +32,8 @@ public class Elevator extends SubsystemBase {
     public Command moveToPositionCommand(double inches) {
         return new InstantCommand(() -> moveToPostion(inches));
     }
+
+    public void elevatorHoldPostion(){
+        
+    }
 }

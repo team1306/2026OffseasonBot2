@@ -14,9 +14,7 @@ public interface ArmIO {
 
     public default void updateInputs(ArmIOInput inputs) {}
 
-    public default void rotateToPostion(Angle postion) {}
 
-    public default void rotate(double speed){}
+    public default void rotateToPostion(Angle rotation) {}
 
-    public default void holdPostion(){}
 }

@@ -82,9 +82,10 @@ public class Robot extends LoggedRobot {
     // block in order for anything in the Command-based framework to work.
 
     if (Constants.elevatorLimitSwitch.get() == true){
-      m_robotContainer.arm.holdArmPostion();
+      m_robotContainer.elevator.elevatorHoldPostion();
+
     }
-    
+
     CommandScheduler.getInstance().run();
   }
 

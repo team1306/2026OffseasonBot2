@@ -15,7 +15,13 @@ import frc.robot.subsystems.elevator.ElevatorIOReal;
 import frc.robot.subsystems.elevator.ElevatorPostion;
 
 import static edu.wpi.first.units.Units.Inches;
+import static edu.wpi.first.units.Units.Rotation;
+import static edu.wpi.first.units.Units.Rotations;
 
+import java.util.function.Supplier;
+
+import edu.wpi.first.units.AngleUnit;
+import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -28,7 +34,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-  private final Elevator elevator;
+  final Elevator elevator;
   public final Arm arm;
 
   private final CommandXboxController controller = new CommandXboxController(0);
@@ -61,8 +67,8 @@ public class RobotContainer {
     controller.y().onTrue(elevator.moveToPositionCommand(ElevatorPostion.level2.getHeight().in(Inches)));
     controller.x().onTrue(elevator.moveToPositionCommand(ElevatorPostion.level3.getHeight().in(Inches)));
 
-    controller.leftBumper().onTrue(arm.rotateArmCommand(0.5));
-    controller.rightBumper().onTrue(arm.rotateArmCommand(-0.5));
+    controller.leftBumper().onTrue(arm.roatateToPostionCommad(Rotations.of(0.25)));
+    controller.rightBumper().onTrue(arm.roatateToPostionCommad(Rotations.of(-0.25)));
   }
 
   public Command getAutonomousCommand(){

@@ -23,20 +23,7 @@ public class Arm implements Subsystem {
         Logger.processInputs("Arm", inputs);
     }
 
-    public void holdArmPostion(){
-        armIO.holdPostion();
-    }
-
-    public void rotateArm(double speed){
-        armIO.rotate(speed);
-    }
-
-
     public Command roatateToPostionCommad(Angle postion){
         return new InstantCommand(() -> armIO.rotateToPostion(postion));
-    }
-
-    public Command rotateArmCommand(double speed){
-        return new StartEndCommand(() -> rotateArm(speed), () -> holdArmPostion(), this);
     }
 }

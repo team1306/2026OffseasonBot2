@@ -3,6 +3,7 @@ package frc.robot.subsystems.elevator;
 import static edu.wpi.first.units.Units.Rotations;
 
 import com.ctre.phoenix6.configs.SlotConfigs;
+import com.ctre.phoenix6.controls.NeutralOut;
 import com.ctre.phoenix6.controls.PositionTorqueCurrentFOC;
 import com.ctre.phoenix6.hardware.TalonFX;
 
@@ -39,5 +40,12 @@ public class ElevatorIOReal implements ElevatorIO {
         positionTorque.Position = postion.in(Rotations);
         rightMotor.setControl(positionTorque);
         leftMotor.setControl(positionTorque);
+    }
+
+    @Override
+    public void holdPostion(){
+        positionTorque.Position = 0;
+        rightMotor.setControl(new NeutralOut());
+        leftMotor.setControl(new NeutralOut());
     }
 }

@@ -19,7 +19,7 @@ public class ArmIOReal implements ArmIO {
 
     private final PositionTorqueCurrentFOC positionTorque = new PositionTorqueCurrentFOC(0);
 
-    private final PIDTunable pidTunable = new PIDTunable("Elevator", SlotConfigs.from(ElevatorConstants.config.Slot1), motor);
+    private final PIDTunable pidTunable = new PIDTunable("Arm", SlotConfigs.from(ElevatorConstants.config.Slot1), motor);
 
     private final TalonFXSignals motorSignals;
 
@@ -35,18 +35,8 @@ public class ArmIOReal implements ArmIO {
     }
 
     @Override
-    public void rotateToPostion(Angle postion){
-        positionTorque.Position = postion.in(Rotations);
+    public void rotateToPostion(Angle rotation){
+        positionTorque.Position = rotation.in(Rotations);
         motor.setControl(positionTorque);
-    }
-
-    @Override 
-    public void rotate(double speed){
-        motor.setControl(new DutyCycleOut(speed));
-    }
-
-    @Override
-    public void holdPostion(){
-        motor.setControl(new NeutralOut());
     }
 }
