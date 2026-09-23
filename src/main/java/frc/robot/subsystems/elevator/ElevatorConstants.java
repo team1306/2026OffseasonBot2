@@ -31,6 +31,7 @@ public class ElevatorConstants {
                 withSlot0(MotorConfigUtils.createSlotConfig(
                     KP, KD, KS, 0, KG, GravityTypeValue.Elevator_Static, 
                     StaticFeedforwardSignValue.UseClosedLoopSign));
+    // TODO: Add motion magic configs. You can do MotorConfigUtils.createMotionMagicConfig
 
         public static TalonFXConfiguration invertedConfig = MotorConfigUtils.createInvertedConfig(config);
 }
