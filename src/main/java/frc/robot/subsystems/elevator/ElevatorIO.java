@@ -18,4 +18,6 @@ public interface ElevatorIO {
 
   public default void holdPostion(){}
 
+  public default void limitSwitchHit(){}
+
 }

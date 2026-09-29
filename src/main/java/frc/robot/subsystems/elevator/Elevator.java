@@ -27,6 +27,7 @@ public class Elevator extends SubsystemBase {
         double Position = inches * ElevatorConstants.inchesPerRotation;
         elevatorIO.moveToPosition(Rotations.of(Position));
         Logger.recordOutput("Elevator/elevator postion", inches);
+        ElevatorConstants.elevatorPostion = inches;
     }
 
     public Command moveToPositionCommand(double inches) {

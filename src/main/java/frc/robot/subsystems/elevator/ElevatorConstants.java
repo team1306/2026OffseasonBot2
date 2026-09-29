@@ -16,6 +16,8 @@ public class ElevatorConstants {
     public final static int rightMotorID = 1;
     public final static int leftMotorID = 2;
 
+    public static double elevatorPostion;
+
     static final double KP = 0;
     static final double KS = 0;
     static final double KD = 0;
@@ -32,6 +34,8 @@ public class ElevatorConstants {
                     KP, KD, KS, 0, KG, GravityTypeValue.Elevator_Static, 
                     StaticFeedforwardSignValue.UseClosedLoopSign));
     // TODO: Add motion magic configs. You can do MotorConfigUtils.createMotionMagicConfig
+    
+    // idk how to do that
 
         public static TalonFXConfiguration invertedConfig = MotorConfigUtils.createInvertedConfig(config);
 }

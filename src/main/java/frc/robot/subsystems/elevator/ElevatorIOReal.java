@@ -3,6 +3,7 @@ package frc.robot.subsystems.elevator;
 import static edu.wpi.first.units.Units.Rotations;
 
 import com.ctre.phoenix6.configs.SlotConfigs;
+import com.ctre.phoenix6.controls.MotionMagicTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.NeutralOut;
 import com.ctre.phoenix6.controls.PositionTorqueCurrentFOC;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -10,12 +11,13 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import badgerutils.advantagekit.PIDTunable;
 import badgerutils.advantagekit.talonfx.TalonFXSignals;
 import edu.wpi.first.units.measure.Angle;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 public class ElevatorIOReal implements ElevatorIO {
     private TalonFX rightMotor = new TalonFX(ElevatorConstants.rightMotorID);
     private TalonFX leftMotor = new TalonFX(ElevatorConstants.leftMotorID);
 
-    // TODO: Add a limit switch
+    public static DigitalInput elevatorLimitSwitch = new DigitalInput(0);
 
     private final TalonFXSignals leftMotorSignals;
     private final TalonFXSignals rightMotorSignals;
@@ -23,8 +25,8 @@ public class ElevatorIOReal implements ElevatorIO {
     private final PIDTunable pidTunable = new PIDTunable("Elevator", SlotConfigs.from(ElevatorConstants.config.Slot0), leftMotor, rightMotor);
 
     // TODO: After talking with Sam L, we're gonna try using motion magic, which gives velocity and acceleration limits.
-    // Swap PositionTorqueCurrentFOC for MotionMagicTorqueCurrentFOC, and add those to the configs.
-    private final PositionTorqueCurrentFOC positionTorque = new PositionTorqueCurrentFOC(0);
+    /// Swap PositionTorqueCurrentFOC for MotionMagicTorqueCurrentFOC, and add those to the configs.
+    private final MotionMagicTorqueCurrentFOC positionTorque = new MotionMagicTorqueCurrentFOC(0);
 
     public ElevatorIOReal() {
         leftMotorSignals = new TalonFXSignals(leftMotor);
@@ -33,9 +35,9 @@ public class ElevatorIOReal implements ElevatorIO {
         rightMotor.getConfigurator().apply(ElevatorConstants.config);
     }
 
-    // TODO: Add a method that polls the limit switch. It should be called in the perioidic loop of Elevator.java.
-    // When the elevator reaches the limit switch, you can manually set the motor encoder values to the min height in rotations (make a constant for this)
-    // Also log the value of the limit switch
+    /// TODO: Add a method that polls the limit switch. It should be called in the perioidic loop of Elevator.java.
+    /// When the elevator reaches the limit switch, you can manually set the motor encoder values to the min height in rotations (make a constant for this)
+    /// Also log the value of the limit switch
 
     @Override
     public void updateInputs(ElevatorIOInputs inputs){
@@ -50,9 +52,10 @@ public class ElevatorIOReal implements ElevatorIO {
         leftMotor.setControl(positionTorque);
     }
 
+
     @Override
-    public void holdPostion(){
-        positionTorque.Position = 0;
+    public void limitSwitchHit(){
+        ElevatorConstants.elevatorPostion = 12;
         rightMotor.setControl(new NeutralOut());
         leftMotor.setControl(new NeutralOut());
     }
