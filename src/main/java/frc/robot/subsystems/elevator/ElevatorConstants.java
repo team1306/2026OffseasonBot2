@@ -1,6 +1,9 @@
 package frc.robot.subsystems.elevator;
 
 import static edu.wpi.first.units.Units.Amps;
+import static edu.wpi.first.units.Units.Rotations;
+import static edu.wpi.first.units.Units.RotationsPerSecond;
+import static edu.wpi.first.units.Units.RotationsPerSecondPerSecond;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.signals.GravityTypeValue;
@@ -9,6 +12,9 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.StaticFeedforwardSignValue;
 
 import badgerutils.motor.MotorConfigUtils;
+import edu.wpi.first.units.measure.AngularAcceleration;
+import edu.wpi.first.units.measure.AngularVelocity;
+import edu.wpi.first.units.measure.Velocity;
 
 public class ElevatorConstants {
     public final static double inchesPerRotation = 1;
@@ -32,10 +38,8 @@ public class ElevatorConstants {
                 Amps.of(80))).
                 withSlot0(MotorConfigUtils.createSlotConfig(
                     KP, KD, KS, 0, KG, GravityTypeValue.Elevator_Static, 
-                    StaticFeedforwardSignValue.UseClosedLoopSign));
-    // TODO: Add motion magic configs. You can do MotorConfigUtils.createMotionMagicConfig
-    
-    // idk how to do that
+                    StaticFeedforwardSignValue.UseClosedLoopSign)).
+                    withMotionMagic(MotorConfigUtils.createMotionMagicConfig(RotationsPerSecond.of(100), RotationsPerSecondPerSecond.of(100)));
 
         public static TalonFXConfiguration invertedConfig = MotorConfigUtils.createInvertedConfig(config);
 }

@@ -16,8 +16,6 @@ public interface ElevatorIO {
 
   public default void moveToPosition(Angle postion) {}
 
-  public default void holdPostion(){}
-
   public default void limitSwitchHit(){}
 
 }

@@ -85,7 +85,7 @@ public class Robot extends LoggedRobot {
 
     Logger.recordOutput("Elevator/LimitSwitch", ElevatorIOReal.elevatorLimitSwitch.get());
     if (ElevatorIOReal.elevatorLimitSwitch.get() == true){
-      m_robotContainer.elevator.elevatorHoldPostion();
+      m_robotContainer.elevator.elevatorLimitSwitchHit();
 
     }
 

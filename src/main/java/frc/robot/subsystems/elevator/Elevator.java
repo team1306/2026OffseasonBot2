@@ -34,7 +34,7 @@ public class Elevator extends SubsystemBase {
         return new InstantCommand(() -> moveToPostion(inches));
     }
 
-    public void elevatorHoldPostion(){
-        
+    public void elevatorLimitSwitchHit(){
+        elevatorIO.limitSwitchHit();
     }
 }
