@@ -18,4 +18,6 @@ public interface ElevatorIO {
 
   public default void limitSwitchHit(){}
 
+  public default void setMotorPostion(Double inches){}
+
 }

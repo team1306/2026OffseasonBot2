@@ -22,7 +22,6 @@ public class ElevatorConstants {
     public final static int rightMotorID = 1;
     public final static int leftMotorID = 2;
 
-    public static double elevatorPostion;
 
     static final double KP = 0;
     static final double KS = 0;

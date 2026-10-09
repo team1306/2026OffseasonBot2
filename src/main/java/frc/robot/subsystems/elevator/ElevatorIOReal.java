@@ -1,11 +1,11 @@
 package frc.robot.subsystems.elevator;
 
+import static edu.wpi.first.units.Units.Inches;
 import static edu.wpi.first.units.Units.Rotations;
 
 import com.ctre.phoenix6.configs.SlotConfigs;
 import com.ctre.phoenix6.controls.MotionMagicTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.NeutralOut;
-import com.ctre.phoenix6.controls.PositionTorqueCurrentFOC;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import badgerutils.advantagekit.PIDTunable;
@@ -55,8 +55,14 @@ public class ElevatorIOReal implements ElevatorIO {
 
     @Override
     public void limitSwitchHit(){
-        ElevatorConstants.elevatorPostion = 12;
+        setMotorPostion(ElevatorPostion.down.getHeight().in(Inches));
         rightMotor.setControl(new NeutralOut());
         leftMotor.setControl(new NeutralOut());
+    }
+
+    @Override
+    public void setMotorPostion(Double inches){
+        rightMotor.setPosition(inches);
+        leftMotor.setPosition(inches);
     }
 }

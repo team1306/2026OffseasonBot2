@@ -9,21 +9,25 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.ArmIO;
 import frc.robot.subsystems.arm.ArmIOReal;
+import frc.robot.subsystems.arm.ArmPostion;
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.ElevatorIO;
 import frc.robot.subsystems.elevator.ElevatorIOReal;
 import frc.robot.subsystems.elevator.ElevatorPostion;
 
 import static edu.wpi.first.units.Units.Inches;
+import static edu.wpi.first.units.Units.Radian;
 import static edu.wpi.first.units.Units.Rotation;
 import static edu.wpi.first.units.Units.Rotations;
 
 import java.util.function.Supplier;
+import java.util.logging.Logger;
 
 import edu.wpi.first.units.AngleUnit;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -36,6 +40,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   final Elevator elevator;
   public final Arm arm;
+  private int postion;
 
   private final CommandXboxController controller = new CommandXboxController(0);
 
@@ -62,16 +67,21 @@ public class RobotContainer {
 
 
   private void configureBindings(){
-    controller.a().onTrue(elevator.moveToPositionCommand(ElevatorPostion.down.getHeight().in(Inches)));
-    controller.b().onTrue(elevator.moveToPositionCommand(ElevatorPostion.up.getHeight().in(Inches)));
-    controller.y().onTrue(elevator.moveToPositionCommand(ElevatorPostion.level2.getHeight().in(Inches)));
+
+    controller.a().onTrue(elevator.moveToPositionCommand(ElevatorPostion.level2.getHeight().in(Inches)));
+    controller.b().onTrue(elevator.moveToPositionCommand(ElevatorPostion.down.getHeight().in(Inches)));
+    controller.y().onTrue(elevator.moveToPositionCommand(ElevatorPostion.up.getHeight().in(Inches)));
     controller.x().onTrue(elevator.moveToPositionCommand(ElevatorPostion.level3.getHeight().in(Inches)));
 
-    controller.leftBumper().onTrue(arm.roatateToPostionCommad(Rotations.of(0.25)));
-    controller.rightBumper().onTrue(arm.roatateToPostionCommad(Rotations.of(-0.25)));
+    controller.a().onTrue(arm.roatateToPostionCommad(ArmPostion.level2.getHeight()));
+    controller.b().onTrue(arm.roatateToPostionCommad(ArmPostion.down.getHeight()));
+    controller.y().onTrue(arm.roatateToPostionCommad(ArmPostion.up.getHeight()));
+    controller.x().onTrue(arm.roatateToPostionCommad(ArmPostion.level3.getHeight()));
   }
 
   public Command getAutonomousCommand(){
     return Commands.none();
   }
+
+
 }

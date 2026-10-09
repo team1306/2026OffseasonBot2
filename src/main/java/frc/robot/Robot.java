@@ -27,6 +27,7 @@ import frc.robot.subsystems.elevator.ElevatorIOReal;
  */
 public class Robot extends LoggedRobot {
   private Command m_autonomousCommand;
+  int selectedPostion = 0;
 
   private final RobotContainer m_robotContainer;
 
@@ -82,6 +83,8 @@ public class Robot extends LoggedRobot {
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
+
+
 
     Logger.recordOutput("Elevator/LimitSwitch", ElevatorIOReal.elevatorLimitSwitch.get());
     if (ElevatorIOReal.elevatorLimitSwitch.get() == true){
@@ -146,4 +149,5 @@ public class Robot extends LoggedRobot {
   /** This function is called periodically whilst in simulation. */
   @Override
   public void simulationPeriodic() {}
+
 }
