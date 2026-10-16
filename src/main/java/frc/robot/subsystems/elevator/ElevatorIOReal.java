@@ -1,9 +1,12 @@
 package frc.robot.subsystems.elevator;
 
+import static edu.wpi.first.units.Units.Amps;
 import static edu.wpi.first.units.Units.Inches;
 import static edu.wpi.first.units.Units.Rotations;
 
+import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.SlotConfigs;
+import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.MotionMagicTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.NeutralOut;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -11,7 +14,9 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import badgerutils.advantagekit.PIDTunable;
 import badgerutils.advantagekit.talonfx.TalonFXSignals;
 import edu.wpi.first.units.measure.Angle;
+import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DutyCycle;
 
 public class ElevatorIOReal implements ElevatorIO {
     private TalonFX rightMotor = new TalonFX(ElevatorConstants.rightMotorID);
@@ -64,5 +69,44 @@ public class ElevatorIOReal implements ElevatorIO {
     public void setMotorPostion(Double inches){
         rightMotor.setPosition(inches);
         leftMotor.setPosition(inches);
+    }
+
+    @Override
+    public void homeElevator(){
+        if(leftMotor.getStatorCurrent() == Amps.of(30)){
+
+            if(rightMotor.getStatorCurrent() == Amps.of(30)){
+
+                rightMotor.setControl(new NeutralOut());
+                leftMotor.setControl(new NeutralOut());
+                return;
+            }
+        }
+
+        rightMotor.setControl(new DutyCycleOut(0.05));
+        leftMotor.setControl(new DutyCycleOut(0.05));
+    }
+
+    @Override
+    public void setDutyCycle(double speed){
+        rightMotor.setControl(new DutyCycleOut(speed));
+        leftMotor.setControl(new DutyCycleOut(speed));
+    }
+
+    @Override
+    public void neutralOut(){
+        rightMotor.setControl(new NeutralOut());
+        leftMotor.setControl(new NeutralOut());
+    }
+
+    @Override
+    public StatusSignal<Current> getMotorCurrent(){
+        return leftMotor.getStatorCurrent(); 
+    }
+
+    @Override
+    public void zeroMotors(){
+        rightMotor.setPosition(0);
+        leftMotor.setPosition(0);
     }
 }

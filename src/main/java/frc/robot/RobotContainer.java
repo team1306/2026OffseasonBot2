@@ -4,8 +4,7 @@
 
 package frc.robot;
 
-import frc.robot.commands.Autos;
-import frc.robot.commands.ExampleCommand;
+
 import frc.robot.subsystems.arm.Arm;
 import frc.robot.subsystems.arm.ArmIO;
 import frc.robot.subsystems.arm.ArmIOReal;
@@ -15,23 +14,11 @@ import frc.robot.subsystems.elevator.ElevatorIO;
 import frc.robot.subsystems.elevator.ElevatorIOReal;
 import frc.robot.subsystems.elevator.ElevatorPostion;
 
-import static edu.wpi.first.units.Units.Inches;
-import static edu.wpi.first.units.Units.Radian;
-import static edu.wpi.first.units.Units.Rotation;
-import static edu.wpi.first.units.Units.Rotations;
-
-import java.security.spec.PSSParameterSpec;
-import java.util.function.Supplier;
-import java.util.logging.Logger;
-
-import edu.wpi.first.units.AngleUnit;
-import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -80,6 +67,7 @@ public class RobotContainer {
     controller.x().onTrue(new InstantCommand(() -> setPosition(3)));
 
     controller.rightBumper().onTrue(new InstantCommand(() -> goToPostion()));
+    controller.leftBumper().onTrue(elevator.homeElevatorCommand());
   }
 
   private void setPosition(int tempPostion) {
@@ -89,19 +77,19 @@ public class RobotContainer {
   private void goToPostion() {
     if (postion == 1) {
       CommandScheduler.getInstance().schedule(arm.roatateToPostionCommad(ArmPostion.down.getHeight()));
-      CommandScheduler.getInstance().schedule(elevator.moveToPositionCommand(ElevatorPostion.down.getHeight().in(Inches)));
+      CommandScheduler.getInstance().schedule(elevator.moveToPositionCommand(ElevatorPostion.down.getHeight()));
     }
     else if (postion == 2){
       CommandScheduler.getInstance().schedule(arm.roatateToPostionCommad(ArmPostion.level2.getHeight()));
-      CommandScheduler.getInstance().schedule(elevator.moveToPositionCommand(ElevatorPostion.level2.getHeight().in(Inches)));
+      CommandScheduler.getInstance().schedule(elevator.moveToPositionCommand(ElevatorPostion.level2.getHeight()));
     }
     else if (postion == 3){
       CommandScheduler.getInstance().schedule(arm.roatateToPostionCommad(ArmPostion.level3.getHeight()));
-      CommandScheduler.getInstance().schedule(elevator.moveToPositionCommand(ElevatorPostion.level3.getHeight().in(Inches)));
+      CommandScheduler.getInstance().schedule(elevator.moveToPositionCommand(ElevatorPostion.level3.getHeight()));
     }
     else if (postion == 4){
       CommandScheduler.getInstance().schedule(arm.roatateToPostionCommad(ArmPostion.up.getHeight()));
-      CommandScheduler.getInstance().schedule(elevator.moveToPositionCommand(ElevatorPostion.up.getHeight().in(Inches)));
+      CommandScheduler.getInstance().schedule(elevator.moveToPositionCommand(ElevatorPostion.up.getHeight()));
     }
     else{
       return;
